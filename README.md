@@ -1,21 +1,21 @@
 # Telegram
-Library for telegram bot
+Library for telegram bot api
 
 This is a library for telegram bot which is included all telegram api`s, and some custom functions to help you.
 
 # Long Polling and Webhook Methods
-the bot is flexible that you can use your bot in both long polling and webhook methods
+You can use this library in both long polling and webhook method
 
-use long polling method:
+long polling example:
 
 * $this->method = 'long_polling'
 
-use webhook method:
+webhook example:
 
 * $this->method = 'webhook'
 
 # Start Conversation With User
-for start any conversation with user you need to create "states" table
+To start a conversation with any user you need to create "states" table
 
 * Table Name: states
 
@@ -27,7 +27,7 @@ Columns:
 
 * state: VARCHAR
 
-And there are some helper functions you can use in your code to have conversation with your user:
+And there are some helper functions you can use in your code to have a conversation with your user:
 
 * saveState();
 
@@ -40,4 +40,4 @@ And there are some helper functions you can use in your code to have conversatio
 * updateOrSaveState();
 
 # Contact
-farshad.tofighi74@gmail.com
+farshad.tofighi74 [at] gmail [dot] com
