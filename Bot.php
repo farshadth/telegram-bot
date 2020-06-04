@@ -3,12 +3,21 @@
 include 'Functions.php';
 include 'Api.php';
 
+/**
+ * @author farshadth
+ * @website  https://farshadth.ir
+ * @document https://github.com/farshadth/Telegram
+ * @version 1.0
+ */
+
 class Bot extends Api
 {
 
 
 
     use Functions;
+    public $sleep;
+    public $method;
     public $message;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function __construct()
@@ -16,13 +25,20 @@ class Bot extends Api
         set_time_limit(0);
         error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
         date_default_timezone_set('Asia/Tehran');
-        @DB::connect('localhost' , 'Username' , 'Password' , 'DB_Name');
+        @DB::connect('HOST' , 'USERNAME' , 'PASSWORD' , 'DATABASE');
         $this->token = "Bot_Token";
+        $this->sleep = 0.2;              // sleep per request in long_polling method
+        $this->method = 'long_polling'; // "long_polling" or "webhook"
+        if($this->method == 'long_polling')
+            $this->deleteWebhook();
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function Run()
     {
-        $messages = $this->getUpdates();
+        if($this->method == 'webhook')
+            $messages = array(json_decode(file_get_contents( 'php://input' ), true));
+        else if($this->method == 'long_polling')
+            $messages = $this->getUpdates();
         foreach($messages as $this->message)
         {
             $last_update_id = $this->message->update_id;
@@ -51,14 +67,15 @@ class Bot extends Api
             }
 
             // save last update id
-            file_put_contents('update_id.txt' , $last_update_id);
+            if($this->method == 'long_polling')
+                file_put_contents('update_id.txt' , $last_update_id);
         }
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function start_command()
     {
         $text = "start command";
-        // button keyboard
+        // set button keyboard
         $keyboard1 =
         [
             [
@@ -69,7 +86,7 @@ class Bot extends Api
                 [ 'text' => 'Button 3' ],
             ],
         ];
-        // inline keyboard
+        // set inline keyboard
         $keyboard2 =
         [
             [
@@ -89,7 +106,6 @@ class Bot extends Api
     {
         $text = "help command";
         $this->sendMessage($this->message->chat->id, $text);
-        $this->saveState($this->message->chat->id, "user_is_in_help_command"); // save state of user for conversation
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -98,15 +114,13 @@ class Bot extends Api
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $obj = new Bot();
-while (true)
+if($obj->method == 'webhook')
+    $obj->Run();
+else if($obj->method == 'long_polling')
 {
-    try
+    while (true)
     {
         $obj->Run();
+        sleep($obj->sleep);
     }
-    catch (Exception $e)
-    {
-        echo "Error: ".$e->getMessage()." Line: ".$e->getLine();
-    }
-    sleep(0.2);
 }

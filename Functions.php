@@ -37,7 +37,7 @@ trait Functions
         return $keyboard;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function saveState($chat_id, $state)
+    public function saveState($state)
     {
         /**
          * create table in your database with info in below
@@ -48,14 +48,14 @@ trait Functions
          * state: VARCHAR
          */
         // save state of user to start conversation
-        $result = @DB::insert("INSERT INTO states (chat_id, state) VALUES (? , ?)", [ $chat_id, $state ] );
+        $result = @DB::insert("INSERT INTO states (chat_id, state) VALUES (? , ?)", [ $this->getChatId(), $state ] );
         return $result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function getState($chat_id)
+    public function getState()
     {
         // get state of user when is in conversation
-        $state = @DB::select("SELECT state FROM states WHERE chat_id = ?", [ $chat_id ] );
+        $state = @DB::select("SELECT state FROM states WHERE chat_id = ?", [ $this->getChatId() ] );
         if($state->num_rows > 0)
             while ($row = $state->fetch_object())
                 return $row->state;
@@ -63,30 +63,40 @@ trait Functions
             return false;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function updateState($chat_id, $state)
+    public function updateState($state)
     {
         // update state of user when answers to conversation
-        $result = @DB::update("UPDATE states SET state = ? WHERE chat_id = ? LIMIT 1", [ $state, $chat_id ] );
+        $result = @DB::update("UPDATE states SET state = ? WHERE chat_id = ? LIMIT 1", [ $state, $this->getChatId() ] );
         return $result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function deleteState($chat_id)
+    public function deleteState()
     {
         // delete state of user when conversation is finished
-        $result = @DB::delete("DELETE FROM states WHERE chat_id = ? LIMIT 1", [ $chat_id ] );
+        $result = @DB::delete("DELETE FROM states WHERE chat_id = ? LIMIT 1", [ $this->getChatId() ] );
         return $result;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function updateOrSaveState($chat_id, $state)
+    public function updateOrSaveState($state)
     {
         // update state of user in conversation if saved before else save it
-        $check_state = @DB::select("SELECT state FROM states WHERE chat_id = ? LIMIT 1", [ $chat_id ] );
+        $check_state = @DB::select("SELECT state FROM states WHERE chat_id = ? LIMIT 1", [ $this->getChatId() ] );
         if($check_state->num_rows > 0)
-            $result = @DB::update("UPDATE states SET state = ? WHERE chat_id = ? LIMIT 1", [ $state, $chat_id ] );
+            $result = @DB::update("UPDATE states SET state = ? WHERE chat_id = ? LIMIT 1", [ $state, $this->getChatId() ] );
         else
-            $result = @DB::insert("INSERT INTO states (chat_id, state) VALUES (? , ?)", [ $chat_id, $state ] );
+            $result = @DB::insert("INSERT INTO states (chat_id, state) VALUES (? , ?)", [ $this->getChatId(), $state ] );
 
         return $result;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public function getChatId()
+    {
+        if(isset($this->message->message))
+            $chat_id = $this->message->message->chat->id;
+        else
+            $chat_id = $this->message->chat->id;
+
+        return $chat_id;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
