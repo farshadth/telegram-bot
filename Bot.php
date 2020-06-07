@@ -4,7 +4,7 @@ include 'Functions.php';
 include 'Api.php';
 
 /**
- * @author farshadth
+ * @author Farshad Tofighi
  * @website  https://farshadth.ir
  * @document https://github.com/farshadth/Telegram
  * @version 1.0
