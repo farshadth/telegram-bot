@@ -4,10 +4,10 @@ include 'Functions.php';
 include 'Api.php';
 
 /**
- * @author farshadth
- * @website  https://farshadth.ir
- * @document https://github.com/farshadth/Telegram
- * @version 1.0
+ * @author Farshad Tofighi
+ * @see https://farshadth.ir
+ * @see https://github.com/farshadth/Telegram
+ * @version  1.0
  */
 
 class Bot extends Api
@@ -22,11 +22,11 @@ class Bot extends Api
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function __construct()
     {
+        $this->token = "Bot_Token";
         set_time_limit(0);
         error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
         date_default_timezone_set('Asia/Tehran');
         @DB::connect('HOST' , 'USERNAME' , 'PASSWORD' , 'DATABASE');
-        $this->token = "Bot_Token";
         $this->sleep = 0.2;              // sleep per request in long_polling method
         $this->method = 'long_polling'; // "long_polling" or "webhook"
         if($this->method == 'long_polling')
