@@ -1,7 +1,7 @@
 <?php
 
-include 'Functions.php';
-include 'Api.php';
+include_once 'Core.php';
+include_once 'Api.php';
 
 /**
  * @author Farshad Tofighi
@@ -10,38 +10,38 @@ include 'Api.php';
  * @version  1.0
  */
 
-class Bot extends Api
+class Bot
 {
 
 
+    use Core, Api;
 
-    use Functions;
-    public $sleep;
-    public $method;
     public $message;
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public function __construct()
     {
-        $this->token = "Bot_Token";
-        set_time_limit(0);
-        error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
-        date_default_timezone_set('Asia/Tehran');
-        @DB::connect('HOST' , 'USERNAME' , 'PASSWORD' , 'DATABASE');
-        $this->sleep = 0.2;              // sleep per request in long_polling method
-        $this->method = 'long_polling'; // "long_polling" or "webhook"
-        if($this->method == 'long_polling')
-            $this->deleteWebhook();
+        $setting = [
+            'token' => "Bot_Token",
+            'database' => [
+                'host'     => 'HOST',
+                'username' => 'USERNAME',
+                'password' => 'PASSWORD',
+                'database' => 'DATABASE',
+            ],
+            'sleep'  => 0.5,            // sleep per request in long_polling method, default is 0.2 second
+            'method' => 'long_polling', // "long_polling" or "webhook", default is "long_polling"
+        ];
+        $this->Init($setting); // initial setting
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     public function Run()
     {
-        if($this->method == 'webhook')
-            $messages = array(json_decode(file_get_contents( 'php://input' ), true));
-        else if($this->method == 'long_polling')
-            $messages = $this->getUpdates();
+        $messages = $this->getMessages();
+
         foreach($messages as $this->message)
         {
-            $last_update_id = $this->message->update_id;
+            // save last update id
+            $this->saveLastUpdateId();
 
             if(isset($this->message->message))
             {
@@ -65,19 +65,14 @@ class Bot extends Api
                 $this->message = $this->message->callback_query;
                 // code here
             }
-
-            // save last update id
-            if($this->method == 'long_polling')
-                file_put_contents('update_id.txt' , $last_update_id);
         }
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     public function start_command()
     {
         $text = "start command";
         // set button keyboard
-        $keyboard1 =
-        [
+        $keyboard1 = [
             [
                 [ 'text' => 'Button 1' ],
                 [ 'text' => 'Button 2' ]
@@ -87,8 +82,7 @@ class Bot extends Api
             ],
         ];
         // set inline keyboard
-        $keyboard2 =
-        [
+        $keyboard2 = [
             [
                 [ 'text' => 'Button', 'callback_data' => 'data' ],
             ],
@@ -98,21 +92,25 @@ class Bot extends Api
         ];
         $keyboard = $this->buttonKeyboard($keyboard1);
 //        $keyboard = $this->inlineKeyboard($keyboard2); // use for send inline keyboard instead
-        $optional = "&reply_markup=$keyboard";
-        $this->sendMessage($this->message->chat->id, $text, $optional);
+        $this->sendMessage([
+            'chat_id' => $this->chatId(),
+            'text' => $text,
+            'reply_markup' => $keyboard
+        ]);
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     public function help_command()
     {
         $text = "help command";
-        $this->sendMessage($this->message->chat->id, $text);
+        $this->sendMessage([
+            'chat_id' => $this->chatId(),
+            'text' => $text,
+        ]);
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
+    
 
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 $obj = new Bot();
 if($obj->method == 'webhook')
     $obj->Run();

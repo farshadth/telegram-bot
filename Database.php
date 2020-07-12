@@ -5,59 +5,62 @@ class DB
 {
 
 
-
     public static $con;
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public static function connect($hostname , $username , $password , $database)
     {
-        self::$con = @mysqli_connect($hostname , $username , $password , $database) or die('Error: '.mysqli_connect_error());
+        static::$con = mysqli_connect($hostname , $username , $password , $database) or die('Error: '.mysqli_connect_error());
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public static function disconnect()
     {
-        mysqli_close(self::$con);
+        mysqli_close(static::$con);
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public static function insert($sql , $values)
     {
-        $values = self::safeValues($values);
-        $sql = self::$con->prepare($sql);
-        mysqli_set_charset(self::$con , 'UTF8');
-        self::bindValues($sql , $values);
+        $values = static::safeValues($values);
+        $sql = static::$con->prepare($sql);
+        mysqli_set_charset(static::$con , 'UTF8');
+        static::bindValues($sql , $values);
         $result = $sql->execute();
+        
         return $result;
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public static function select($sql , $values = null)
     {
-        $values = self::safeValues($values);
-        $sql = self::$con->prepare($sql);
-        mysqli_set_charset(self::$con , 'UTF8');
-        self::bindValues($sql , $values);
+        $values = static::safeValues($values);
+        $sql = static::$con->prepare($sql);
+        mysqli_set_charset(static::$con , 'UTF8');
+        static::bindValues($sql , $values);
         $sql->execute();
         $result = $sql->get_result();
+        
         return $result;
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public static function update($sql , $values)
     {
-        $values = self::safeValues($values);
-        $sql = self::$con->prepare($sql);
-        mysqli_set_charset(self::$con , 'UTF8');
-        self::bindValues($sql , $values);
+        $values = static::safeValues($values);
+        $sql = static::$con->prepare($sql);
+        mysqli_set_charset(static::$con , 'UTF8');
+        static::bindValues($sql , $values);
         $result = $sql->execute();
+        
         return $result;
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public static function delete($sql , $values = null)
     {
-        $values = self::safeValues($values);
-        $sql = self::$con->prepare($sql);
-        self::bindValues($sql , $values);
+        $values = static::safeValues($values);
+        $sql = static::$con->prepare($sql);
+        static::bindValues($sql , $values);
         $result = $sql->execute();
+        
         return $result;
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public function safeValues($values = null)
     {
         if($values != null)
@@ -69,9 +72,10 @@ class DB
                 mysqli_real_escape_string(self::$con , $values[$i]);
             }
         }
+        
         return $values;
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public function bindValues($sql, $values = null)
     {
         if ($values != null)
@@ -104,10 +108,9 @@ class DB
             // Call the Function bind_param with dynamic Parameters
             call_user_func_array(array($sql,'bind_param') , $bind_names);
         }
+        
         return $sql;
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 }
