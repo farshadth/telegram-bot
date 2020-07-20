@@ -40,7 +40,7 @@
     <property name="options.lastSelected" value="com.intellij.application.options.CodeStyleSchemesConfigurable" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="js.build_tools.gulp">
@@ -105,7 +105,13 @@
       <workItem from="1591472174319" duration="881000" />
       <workItem from="1591639543506" duration="8441000" />
       <workItem from="1591727382897" duration="33000" />
-      <workItem from="1594578593769" duration="6843000" />
+      <workItem from="1594578593769" duration="7083000" />
+      <workItem from="1594654517106" duration="878000" />
+      <workItem from="1595103667781" duration="4351000" />
+      <workItem from="1595167423119" duration="76000" />
+      <workItem from="1595176988112" duration="4587000" />
+      <workItem from="1595274967562" duration="5735000" />
+      <workItem from="1595280785562" duration="1300000" />
     </task>
     <servers />
   </component>
@@ -117,18 +123,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="570" y="200" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1591264184550" />
-    <state x="488" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1594580055561">
+    <state x="488" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1595280527824">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="79" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1594580055561" />
+    <state x="488" y="79" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1595280527824" />
     <state x="221" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1594578877093">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="221" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1594578877093" />
-    <state x="463" y="85" key="FileChooserDialogImpl" timestamp="1591727415383">
+    <state x="463" y="85" key="FileChooserDialogImpl" timestamp="1595167496003">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="85" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1591727415383" />
+    <state x="463" y="85" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1595167496003" />
     <state width="1323" height="215" key="GridCell.Tab.0.bottom" timestamp="1591648162802">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -185,13 +191,17 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="518" y="283" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1591263104763" />
-    <state x="184" y="8" key="SettingsEditor" timestamp="1594580037932">
+    <state x="184" y="8" key="SettingsEditor" timestamp="1595280739534">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1594580037932" />
+    <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1595280739534" />
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1591266602517">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1591266602517" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1595276997573">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1595276997573" />
   </component>
 </project>

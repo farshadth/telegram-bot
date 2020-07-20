@@ -43,32 +43,31 @@ class Bot
             // save last update id
             $this->saveLastUpdateId();
 
-            if(isset($this->message->message))
+            // when user send message
+            if($this->MessageSent())
             {
-                // when user send message
-                $this->message = $this->message->message;
-
-                if($this->message->text == '/start')
-                    $this->start_command();
-                else if($this->message->text == '/help')
-                    $this->help_command();
+                // code here
+                if($this->getText() == '/start')
+                    $this->startCommand();
+                else if($this->getText() == '/help')
+                    $this->helpCommand();
             }
-            else if(isset($this->message->edited_message))
+            // when user edit his message
+            else if($this->messageEdited())
             {
-                // when user edit his message
-                $this->message = $this->message->edited_message;
                 // code here
             }
-            else if(isset($this->message->callback_query))
+            // when user click on inline keyboard
+            else if($this->keyboardClicked())
             {
-                // when user click on inline keyboard
-                $this->message = $this->message->callback_query;
                 // code here
+                if($this->getKeyboardData() == 'data')
+                    $this->helpCommand();
             }
         }
     }
     
-    public function start_command()
+    public function startCommand()
     {
         $text = "start command";
         // set button keyboard
@@ -90,20 +89,20 @@ class Bot
                 [ 'text' => 'farshadth.ir', 'url' => 'https://farshadth.ir' ],
             ],
         ];
-        $keyboard = $this->buttonKeyboard($keyboard1);
-//        $keyboard = $this->inlineKeyboard($keyboard2); // use for send inline keyboard instead
+//        $keyboard = $this->buttonKeyboard($keyboard1);
+        $keyboard = $this->inlineKeyboard($keyboard2); // use for send inline keyboard instead
         $this->sendMessage([
-            'chat_id' => $this->chatId(),
-            'text' => $text,
+            'chat_id' => $this->getChatId(),
+            'text' => $this->getFullName(),
             'reply_markup' => $keyboard
         ]);
     }
     
-    public function help_command()
+    public function helpCommand()
     {
         $text = "help command";
         $this->sendMessage([
-            'chat_id' => $this->chatId(),
+            'chat_id' => $this->getChatId(),
             'text' => $text,
         ]);
     }

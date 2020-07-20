@@ -19,10 +19,10 @@ class DB
 
     public static function insert($sql , $values)
     {
-        $values = static::safeValues($values);
+        $values = self::safeValues($values);
         $sql = static::$con->prepare($sql);
         mysqli_set_charset(static::$con , 'UTF8');
-        static::bindValues($sql , $values);
+        self::bindValues($sql , $values);
         $result = $sql->execute();
         
         return $result;
@@ -30,10 +30,10 @@ class DB
 
     public static function select($sql , $values = null)
     {
-        $values = static::safeValues($values);
+        $values = self::safeValues($values);
         $sql = static::$con->prepare($sql);
         mysqli_set_charset(static::$con , 'UTF8');
-        static::bindValues($sql , $values);
+        self::bindValues($sql , $values);
         $sql->execute();
         $result = $sql->get_result();
         
@@ -42,10 +42,10 @@ class DB
 
     public static function update($sql , $values)
     {
-        $values = static::safeValues($values);
+        $values = self::safeValues($values);
         $sql = static::$con->prepare($sql);
         mysqli_set_charset(static::$con , 'UTF8');
-        static::bindValues($sql , $values);
+        self::bindValues($sql , $values);
         $result = $sql->execute();
         
         return $result;
@@ -53,9 +53,9 @@ class DB
 
     public static function delete($sql , $values = null)
     {
-        $values = static::safeValues($values);
+        $values = self::safeValues($values);
         $sql = static::$con->prepare($sql);
-        static::bindValues($sql , $values);
+        self::bindValues($sql , $values);
         $result = $sql->execute();
         
         return $result;
