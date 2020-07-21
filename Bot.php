@@ -21,15 +21,15 @@ class Bot
     public function __construct()
     {
         $setting = [
-            'token' => "Bot_Token",
-            'database' => [
+            'bot_token' => "Bot_Token",
+            'database' => [             // optional, if you dont want to use database just remove database key
                 'host'     => 'HOST',
                 'username' => 'USERNAME',
                 'password' => 'PASSWORD',
                 'database' => 'DATABASE',
             ],
-            'sleep'  => 0.5,            // sleep per request in long_polling method, default is 0.2 second
-            'method' => 'long_polling', // "long_polling" or "webhook", default is "long_polling"
+            'sleep'  => 0.5,            // optional, sleep per request in long_polling method, default is 0.2 second
+            'method' => 'long_polling', // optional, "long_polling" or "webhook", default is "long_polling"
         ];
         $this->Init($setting); // initial setting
     }

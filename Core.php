@@ -10,6 +10,7 @@ trait Core
     public $method;
     public $conversationDir = "Conversations";
 
+    private $setting;
     private $host;
     private $username;
     private $password;
@@ -17,14 +18,11 @@ trait Core
 
     public function Init($setting)
     {
+        $this->setting = $setting;
         set_time_limit(0);
         error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
         date_default_timezone_set('Asia/Tehran');
-        $this->token = $setting['token'];
-        $this->host = $setting['database']['host'];
-        $this->username = $setting['database']['username'];
-        $this->password = $setting['database']['password'];
-        $this->database = $setting['database']['database'];
+        $this->token = $setting['bot_token'];
         $this->sleep = ($setting['sleep']) ? $setting['sleep'] : 0.2;
         $this->method = ($setting['method']) ? $setting['method'] : 'long_polling';
         $this->deleteWebhookInLongPolling();
@@ -33,7 +31,14 @@ trait Core
 
     public function connectDatabase()
     {
-        DB::connect($this->host, $this->username, $this->password, $this->password);
+        if(isset($this->setting['database']))
+        {
+            $this->host = $this->setting['database']['host'];
+            $this->username = $this->setting['database']['username'];
+            $this->password = $this->setting['database']['password'];
+            $this->database = $this->setting['database']['database'];
+            DB::connect($this->host, $this->username, $this->password, $this->password);
+        }
     }
 
     public function deleteWebhookInLongPolling()
