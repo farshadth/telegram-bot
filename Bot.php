@@ -17,40 +17,43 @@ class Bot
     use Core, Api;
 
     public $message;
+    public $commands;
 
     public function __construct()
     {
-        $setting = [
+        // initial setting
+        $this->init([
             'bot_token' => "Bot_Token",
-            'database' => [             // optional, if you dont want to use database just remove database key
+            'sleepPerRequest'  => 0.2,   // optional, sleep per request in long_polling method, default is 0.5 second
+            'method' => 'long_polling',  // optional, "long_polling" or "webhook", default is "long_polling"
+            'mysql' => [                 // optional, if you dont want to use database just remove it
                 'host'     => 'HOST',
                 'username' => 'USERNAME',
                 'password' => 'PASSWORD',
                 'database' => 'DATABASE',
             ],
-            'sleep'  => 0.5,            // optional, sleep per request in long_polling method, default is 0.2 second
-            'method' => 'long_polling', // optional, "long_polling" or "webhook", default is "long_polling"
-        ];
-        $this->Init($setting); // initial setting
+        ]);
+
+        // set commands
+        $this->setCommands([
+            'start,/start' => 'startCommand',
+            'help' => 'helpCommand',
+        ]);
     }
-    
-    public function Run()
+
+    public function run()
     {
         $messages = $this->getMessages();
 
         foreach($messages as $this->message)
         {
-            // save last update id
-            $this->saveLastUpdateId();
+            $this->saveLastUpdateId(); // save last update id
 
             // when user send message
             if($this->MessageSent())
             {
                 // code here
-                if($this->getText() == '/start')
-                    $this->startCommand();
-                else if($this->getText() == '/help')
-                    $this->helpCommand();
+                $this->messageIsCommand($this);
             }
             // when user edit his message
             else if($this->messageEdited())
@@ -61,63 +64,22 @@ class Bot
             else if($this->keyboardClicked())
             {
                 // code here
-                if($this->getKeyboardData() == 'data')
-                    $this->helpCommand();
             }
         }
-    }
-    
-    public function startCommand()
-    {
-        $text = "start command";
-        // set button keyboard
-        $keyboard1 = [
-            [
-                [ 'text' => 'Button 1' ],
-                [ 'text' => 'Button 2' ]
-            ],
-            [
-                [ 'text' => 'Button 3' ],
-            ],
-        ];
-        // set inline keyboard
-        $keyboard2 = [
-            [
-                [ 'text' => 'Button', 'callback_data' => 'data' ],
-            ],
-            [
-                [ 'text' => 'farshadth.ir', 'url' => 'https://farshadth.ir' ],
-            ],
-        ];
-//        $keyboard = $this->buttonKeyboard($keyboard1);
-        $keyboard = $this->inlineKeyboard($keyboard2); // use for send inline keyboard instead
-        $this->sendMessage([
-            'chat_id' => $this->getChatId(),
-            'text' => $this->getFullName(),
-            'reply_markup' => $keyboard
-        ]);
-    }
-    
-    public function helpCommand()
-    {
-        $text = "help command";
-        $this->sendMessage([
-            'chat_id' => $this->getChatId(),
-            'text' => $text,
-        ]);
     }
     
 
 }
 
 $obj = new Bot();
+
 if($obj->method == 'webhook')
-    $obj->Run();
+    $obj->run();
 else if($obj->method == 'long_polling')
 {
     while (true)
     {
-        $obj->Run();
-        sleep($obj->sleep);
+        $obj->run();
+        sleep($obj->sleepPerRequest);
     }
 }

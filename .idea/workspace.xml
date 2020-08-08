@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="2f8b1911-a2ab-4541-ac1e-646b4769e02a" name="Default" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +42,7 @@
       <server host="localhost" id="b8a10525-dab6-42a3-9e7e-e5aaf4a0b837" name="localhost" />
     </servers>
   </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4" />
   <component name="ProjectId" id="1cqjJBfcAg7tWGSmkDcb76D5OqZ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -37,6 +56,7 @@
     <property name="add_unversioned_files" value="true" />
     <property name="ignore_missing_gitignore" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="options.lastSelected" value="com.intellij.application.options.CodeStyleSchemesConfigurable" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -113,30 +133,47 @@
       <workItem from="1595274967562" duration="5735000" />
       <workItem from="1595280785562" duration="1501000" />
       <workItem from="1595349573270" duration="58000" />
-      <workItem from="1595351022179" duration="357000" />
+      <workItem from="1595351022179" duration="570000" />
+      <workItem from="1595357975624" duration="22000" />
+      <workItem from="1596884047448" duration="6429000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
+    <state x="263" y="18" key="#CLI_Interpreters" timestamp="1596885452398">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="263" y="18" key="#CLI_Interpreters/0.0.1366.728@0.0.1366.728" timestamp="1596885452398" />
     <state x="570" y="200" key="#Notifications" timestamp="1591264184550">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="570" y="200" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1591264184550" />
-    <state x="488" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1595280527824">
+    <state x="488" y="79" key="#com.intellij.ide.util.MemberChooser" timestamp="1596889831179">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="79" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1595280527824" />
+    <state x="488" y="79" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1596889831179" />
     <state x="221" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1594578877093">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="221" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1594578877093" />
-    <state x="463" y="85" key="FileChooserDialogImpl" timestamp="1595349631214">
+    <state x="463" y="85" key="FileChooserDialogImpl" timestamp="1595357995949">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="85" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1595349631214" />
+    <state x="463" y="85" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1595357995949" />
     <state width="1323" height="215" key="GridCell.Tab.0.bottom" timestamp="1591648162802">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -193,17 +230,21 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="518" y="283" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1591263104763" />
-    <state x="184" y="8" key="SettingsEditor" timestamp="1595280739534">
+    <state x="184" y="8" key="SettingsEditor" timestamp="1596889537094">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1595280739534" />
+    <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1596889537094" />
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1591266602517">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1591266602517" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1595276997573">
+    <state x="490" y="273" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596889378441">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1595276997573" />
+    <state x="490" y="273" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1596889378441" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1596885750356">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1596885750356" />
   </component>
 </project>
