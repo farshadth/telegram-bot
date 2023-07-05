@@ -1,7 +1,7 @@
 # Telegram
-Library for telegram bot based on oop
+Library for telegram bot based on Oop
 
-This is a library for telegram bot which is included all telegram api`s, and some methods to help you.
+This is a telegram bot library that includes all telegram APIs, and some methods to help you.
 
 # Long Polling and Webhook Methods
 You can use this library in both long polling and webhook method
@@ -16,9 +16,9 @@ webhook example:
 
 # Start Conversation With User
 
-The state of user will be saved in database.
+The state of the user will be saved in the database.
 
-To save state of user, you need to create "states" table
+To save the state of the user, you need to create a "states" table
 
 * Table Name: states
 
@@ -28,7 +28,7 @@ Columns:
 * chat_id: INT, UNIQUE
 * state: VARCHAR
 
-And there are some methods you can use to handle state of user in a conversation:
+And there are some methods you can use to handle the state of the user in a conversation:
 
 * saveState();
 * getState();
@@ -36,7 +36,7 @@ And there are some methods you can use to handle state of user in a conversation
 * deleteState();
 * updateOrSaveState();
 
-Also the bot creates a file for each user which stores data that user sends in any step of conversations.
+Also, the bot creates a file for each user which stores data that the user sends in any step of conversations.
 
 To handle the data that is sent by user in conversation, you can use these methods:
 
@@ -45,4 +45,4 @@ To handle the data that is sent by user in conversation, you can use these metho
 * deleteConversationData()
 
 # Contact
-farshad.tofighi74 [at] gmail [dot] com
+farshad.tofighi74.gmail.com
